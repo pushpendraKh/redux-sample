@@ -5,8 +5,14 @@ import store from './Redux/Store';
 class App extends Component {
  render() {
    return(
-     <div style = { {flex: 1, textAlign: 'center', margin: '200'}}>  
-       'Redux Example'
+     <div style = {{ textAlign: 'center', color: 'red'}}>  
+       Redux Example by
+       <div style = { {color: 'purple'}}> 
+          Pushpendra Khandelwal
+          <div style = {{ fontSize: '10px', color: 'black'}}>
+            P.S. This example contains pure-redux with middleware
+            </div>
+       </div>
       </div>
    )
  }
@@ -36,5 +42,13 @@ store.dispatch({type: 'DELETE_TASK', payload: 'CRS'})
 }) */
 
 // to solve this we can use thunk middle ware which is provided by 'react-thunk'
+// Now after installing 'redux-thunk', it is possible 
+
+store.dispatch((dispatch) => {
+  store.dispatch({type: 'ADD_TASK', payload: 'Turvo'})
+  store.dispatch({type: 'ADD_TASK', payload: 'Acko'})
+  store.dispatch({type: 'ADD_TASK', payload: 'HDFC'})
+})
+
 
 export default App;
