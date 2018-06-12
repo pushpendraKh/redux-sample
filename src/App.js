@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {createStore} from 'redux';
+import axios from 'axios'
 import store from './Redux/Store';
 
 class App extends Component {
@@ -45,10 +46,20 @@ store.dispatch({type: 'DELETE_TASK', payload: 'CRS'})
 // Now after installing 'redux-thunk', it is possible 
 
 store.dispatch((dispatch) => {
-  store.dispatch({type: 'ADD_TASK', payload: 'Turvo'})
-  store.dispatch({type: 'ADD_TASK', payload: 'Acko'})
-  store.dispatch({type: 'ADD_TASK', payload: 'HDFC'})
+  dispatch({type: 'ADD_TASK', payload: 'Turvo'})
+  dispatch({type: 'ADD_TASK', payload: 'Acko'})
+  dispatch({type: 'ADD_TASK', payload: 'HDFC'})
 })
 
+store.dispatch((dispatch) => {
+  dispatch({type: 'FETCH_START'})
+  axios.get("http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22")
+  .then((response) => {
+    dispatch({type: 'RESPONSE_RECEIEVED', payload: response.visibility})
+  })
+  .catch((error) => {
+    dispatch({type: 'FETCH_ERROR', payload: error})
+  })
+})
 
 export default App;
