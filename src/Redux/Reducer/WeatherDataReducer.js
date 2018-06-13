@@ -13,7 +13,7 @@ const WeatherDataReducer = (state = initialData, action) => {
             return {...state, fetching: false}
         case 'RESPONSE_RECEIVED':
             return {...state, fetched: true, visibility: action.payload}
-        case 'default':
+        default:
             return state           
     }
 }
